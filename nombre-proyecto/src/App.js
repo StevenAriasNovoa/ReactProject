@@ -7,20 +7,23 @@ import {createBrowserRouter, RouterProvider} from 'react-router-dom';
 function App() {
 
   const router = createBrowserRouter([
+    
     {
-      path: '/*',
-      element:<SingUp></SingUp>
-    },
-    {
-      path: '/inicio',
+      path: '/login',
       element: <Login></Login>
     },
     {
-      path: '/todooapp',
+      path: '/',
+      element:<SingUp></SingUp>
+    },
+    {
+      path: '/tareas/:nombre',
       element: <Todooapp></Todooapp>
     }
   ])
+
   return (
+//el router Provider 
 <RouterProvider router={router}></RouterProvider>
   );
 }
