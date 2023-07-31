@@ -1,0 +1,33 @@
+
+.add {
+    background-color: aliceblue;
+    background-color: rgba(4, 15, 59, 0.573);
+    color :white;
+    font-size: 100%;
+    width: 100px;
+    margin-left: 10px;
+    box-shadow: 2px 2px 2px white;
+}
+
+.search {
+    width: 100px;
+    background-color: aliceblue;
+    color: white;
+    background-color: rgba(4, 15, 59, 0.573);
+    font-size: 100%;
+    margin-left: 10px;
+    box-shadow: 2px 2px 2px white;
+}
+
+.input{
+    background-color: rgba(4, 15, 59, 0.573);
+    width: 30%;
+    height: 8%;
+}
+
+.inputSearch {
+    background-color: rgba(4, 15, 59, 0.573);
+    width: 30%;
+    height: 8%;
+}
+

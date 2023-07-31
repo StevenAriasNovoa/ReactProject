@@ -1,0 +1,16 @@
+
+h2 {
+    margin-top: -2%;
+    font-size: 350%;
+    color: white ;
+    text-align: center;
+    -webkit-text-stroke: 3px black;
+}  
+
+h3 {
+    font-size: 120%;
+    color: white;
+    width: 100%;
+    text-align: center;
+
+}

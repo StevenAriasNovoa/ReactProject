@@ -1,0 +1,48 @@
+.cuerpoTareas{
+    display: flex;
+    flex-direction: row;
+    justify-content: space-around;
+}
+
+.delete{
+    margin-right: 5%;
+    background-color: rgba(4, 15, 59, 0.573);
+    color: white;
+    font-size: 80%;
+    border: 2px solid white;
+}
+
+label {
+    margin-top: 5px;
+    margin-left: 5px;
+    color: white;
+    font-size: 15px;
+    margin-block-end: 1%;
+    word-break: break-all;
+    margin-left: 2%;
+    margin-right: 2%;
+}
+
+
+
+.lista{
+    display: flex;
+    justify-content: space-between;
+    padding: 1%;
+    list-style: none;
+    margin-left: 5%;
+    height: 500%;
+    width: 80%;
+    margin-block-end: 2%;
+    box-shadow: 2px 2px 3px #fff, -1px -2px -0px #fff;
+    border-radius: 15px;
+    
+}
+
+.chechbox {
+    margin-left: 5%;
+}
+
+.lista:hover {
+    background-color: rgba(4, 15, 59, 0.34);
+}
