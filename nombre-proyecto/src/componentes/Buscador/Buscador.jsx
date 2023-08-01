@@ -2,8 +2,7 @@ import React, { useState } from 'react'
 
 function Buscador (props) {
 
-    function search(event) {
-        event.preventDefault()
+    function search() {
         props.searchTarea(props.NuevoImput)
     }
 
@@ -20,7 +19,8 @@ function Buscador (props) {
 
     return (
         <div>
-            < input onKeyDown = { detectarTecla2 } value={props.NuevoImput} onChange={imputChange2}  placeholder="Enter your text..." className="input" name="text" type="text"/>
+            < input onKeyDown = { detectarTecla2 } value={props.NuevoImput} onChange={imputChange2}  placeholder="text Search" className="inputSearch btn btn-outline-light" name="text" type="text"/>
+            <button className="search btn btn-outline-light">SEARCH</button>
         </div >
     )
 }

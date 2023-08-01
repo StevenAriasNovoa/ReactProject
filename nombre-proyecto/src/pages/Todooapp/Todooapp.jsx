@@ -7,10 +7,10 @@ import Tareas from "../../componentes/Tareas/Tareas";
 import Boton from "../../componentes/Button/Button"
 import NoHayTarea from "../../componentes/Oculto/Oculto";
 import Swal from 'sweetalert2';
+import { useNavigate } from "react-router-dom";
+import Buscador from "../../componentes/Buscador/Buscador";
 
 function Todooapp() {
-
-    useEffect(() => { contadorchecks() },[])
 
     function getLocalStroge() {
         //localStorage.getItem
@@ -19,20 +19,34 @@ function Todooapp() {
         return listaConvertida;
     }
 
-    const [IndiceTareas, setIndiceTareas] = useState(getLocalStroge() ?? [])
+    const [IndiceTareas, setIndiceTareas] = useState([])
     const [inpuValue, setInputValue] = useState("");
     const [contador, setcontador] = useState(0);
+
+    const navigate = useNavigate();
+
+    // useEffect(() => { contadorchecks() },[setIndiceTareas])
 
     function saveLocalStroge() {
         localStorage.setItem("listaTareas", JSON.stringify(IndiceTareas))  //convertir a cadena de texto
     }
-
     // hook para detectar when many one cambio
-    useEffect(() => {
-        saveLocalStroge()
-    }, [IndiceTareas])
-
+    // useEffect(() => {
+    //     saveLocalStroge()
+    // }, [IndiceTareas])
     // ---------------waaaaaaaaaaaa----------
+
+    function actualizarTareasUsuarios(listaAy) {
+        const usuario = sessionStorage.getItem("sesion")
+        const usuarioData = JSON.parse(usuario)
+        if (usuarioData) {
+            localStorage.setItem
+                ("indiceTareas" + usuarioData.name.trim(), JSON.stringify(listaAy))
+        }
+        setInputValue("");
+        // contadorchecks(listaAy);
+    }
+
 
     function ponerTareas() {
         if (inpuValue.trim().length < 1) {
@@ -68,10 +82,33 @@ function Todooapp() {
             showConfirmButton: false,
             timer: 700
         })
+
+        const usuario = sessionStorage.getItem("sesion")
+        const usuarioData = JSON.parse(usuario)
+        if (usuarioData) {
+            localStorage.setItem("indiceTareas" + usuarioData.name.trim(), JSON.stringify(listaAy))
+        }
+
     }
+
+    useEffect(() => {
+
+        const usuario = sessionStorage.getItem("sesion")
+        const usuarioData = JSON.parse(usuario)
+
+        if (usuarioData) {
+            const tareasDelUsuario = localStorage.getItem("indiceTareas" + usuarioData.name.trim())
+            const tareasDelUsuarioObj = JSON.parse(tareasDelUsuario) ?? [];
+            setIndiceTareas(tareasDelUsuarioObj);
+            contadorChecksLocal(tareasDelUsuarioObj);
+        } else {
+            navigate("/login")
+        }
+    }, [])
 
     function inputChange(event) {
         setInputValue(event.target.value);
+
     }
 
     function Eliminar(idTarea) {
@@ -107,7 +144,7 @@ function Todooapp() {
                     }
                 }
                 setIndiceTareas(listaAy)
-
+                actualizarTareasUsuarios(listaAy)
                 swalWithBootstrapButtons.fire(
                     'Tarea borrada!',
                     'Tu tarea se borro.',
@@ -137,7 +174,21 @@ function Todooapp() {
         }
         setIndiceTareas(listaAy)
         setcontador(contadorcheck)
+        actualizarTareasUsuarios(listaAy)
     }
+
+    function contadorChecksLocal(listaNueva) {
+        let contadorcheck = 0;
+        for (let icount = 0; icount < listaNueva.length; icount++) {
+            if (listaNueva[icount].rayitaNike === true) {
+                contadorcheck++;
+            }
+        }
+        setcontador(contadorcheck);
+    }
+
+
+
 
     function Validaciones(texto) {
         let listaAy = [...IndiceTareas];
@@ -149,18 +200,20 @@ function Todooapp() {
         return false;
     }
 
-    function detectarTecla(event){
-        if (event.key === 'Enter' || event.keyCode === 13){
-        ponerTareas(event)
+    function detectarTecla(event) {
+        if (event.key === 'Enter' || event.keyCode === 13) {
+            ponerTareas(event)
         }
     }
-    
+
     // -----------------waaaaaaaaaa-----------
 
     return (
         <div className='container'>
             <Titulo ></Titulo>
             <Boton onChange={inputChange} ponerTareas={ponerTareas} onKeyDown={detectarTecla}></Boton>
+            <br />
+            <Buscador></Buscador>
             <div className="contador">
                 <TareasC></TareasC>
                 <span className="numeritos">{contador}</span>

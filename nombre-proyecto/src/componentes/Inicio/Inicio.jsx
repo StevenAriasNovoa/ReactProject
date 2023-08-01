@@ -26,6 +26,7 @@ function CrearCuenta() {
         }
         if (inputNameValor.trim() === "" || inputGmailValor.trim() === "" || inputPasswordValor.trim() === "") {
         alert("Informacion vacia")
+        return;
         }
 
         const newUsuario = {
